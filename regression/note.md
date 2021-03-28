@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-27 22:45:54
- * @LastEditTime: 2021-03-28 10:20:08
+ * @LastEditTime: 2021-03-28 11:22:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /deep_learing/regression/note.md
@@ -43,4 +43,26 @@ $$\frac{\partial{L}}{\partial{\omega}}=2\sum_{i=1}^n(\hat{y}^i-(\omega\cdot x^i+
 $$\frac{\partial{L}}{\partial{b}}=2\sum_{i=1}^n(\hat{y}^i-(\omega\cdot x^i+b))\cdot (-1)$$
 
 &emsp;则有:
+$$\omega^{i}=\omega^{i-1}-\eta\frac{\partial{L}}{\partial{\omega}}|_{\omega=\omega^{i-1},b=b^{i-1}}$$
+$$b^{i}=b^{i-1}-\eta\frac{\partial{L}}{\partial{b}}|_{\omega=\omega^{i-1},b=b^{i-1}}$$
+&emsp;其中 $i\ge1$, $\eta$ 为学习率 (自己设定),写成矩阵的形式如下:
+$$A=\left[ \begin{matrix} 
+                     \omega\\
+                     b  
+                     \end{matrix} \right]$$
+$$\nabla{L}=\left[\begin{matrix}
+                                    \frac{\partial{L}}{\partial{\omega}} \\
+                                                          \\
+                                    \frac{\partial{L}}{\partial{b}}
+                                   \end{matrix} \right]$$
 
+&emsp; 则有:
+$$A^i=A^{i-1}-\eta\nabla{L}$$
+
+**注:以上均采用简单的线性模型进行推导,非线性函数推导过程类似**
+
+### 三、评价求解出的模型
+
+1. 最直观的方法是采用优化完成之后误差函数的稳态值的大小来直接估计模型的好坏,一般来说,误差函数值越小,模型越好.
+2. 问题之一 ***overfitting*** 把训练样本自身的一些特点当做了所有潜在样本的一般性质,导致泛化性能下降
+3. 问题之二***underfitting***
