@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2021-03-28 15:35:45
-LastEditTime: 2021-03-28 17:21:26
+LastEditTime: 2021-03-28 20:46:13
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /Deep_learning/regression/homework/homework.py
@@ -37,9 +37,10 @@ for month in range(12):
                 continue
             x[month * 471 + day * 24 + hour, :] = month_data[month][:,day * 24 + hour : day * 24 + hour + 9].reshape(1, -1) #vector dim:18*9 (9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9)
             y[month * 471 + day * 24 + hour, 0] = month_data[month][9, day * 24 + hour + 9] #value
-print(x)
-print(y)
+#print(x)
+#print(y)
 
+#归一化处理
 mean_x = np.mean(x, axis = 0) #18 * 9 
 std_x = np.std(x, axis = 0) #18 * 9 
 for i in range(len(x)): #12 * 471
@@ -47,9 +48,12 @@ for i in range(len(x)): #12 * 471
         if std_x[j] != 0:
             x[i][j] = (x[i][j] - mean_x[j]) / std_x[j]
 
+
+
 dim = 18 * 9 + 1
 w = np.zeros([dim, 1])
 x = np.concatenate((np.ones([12 * 471, 1]), x), axis = 1).astype(float)
+print(x.shape)
 learning_rate = 100
 iter_time = 1000
 adagrad = np.zeros([dim, 1])
@@ -61,9 +65,10 @@ for t in range(iter_time):
     gradient = 2 * np.dot(x.transpose(), np.dot(x, w) - y) #dim*1
     adagrad += gradient ** 2
     w = w - learning_rate * gradient / np.sqrt(adagrad + eps)
-np.save('weight.npy', w)
+np.save('/home/yinzhicun/Deep_learning/regression/homework/weight.npy', w)
 
-testdata = pd.read_csv('/home/yinzhicun/Deep_learning/regression/homework/test.csv', header=None, encoding='big5')
+# testdata = pd.read_csv('gdrive/My Drive/hw1-regression/test.csv', header = None, encoding = 'big5')
+testdata = pd.read_csv('/home/yinzhicun/Deep_learning/regression/homework/test.csv', header = None, encoding = 'big5')
 test_data = testdata.iloc[:, 2:]
 test_data[test_data == 'NR'] = 0
 test_data = test_data.to_numpy()
@@ -76,6 +81,6 @@ for i in range(len(test_x)):
             test_x[i][j] = (test_x[i][j] - mean_x[j]) / std_x[j]
 test_x = np.concatenate((np.ones([240, 1]), test_x), axis = 1).astype(float)
 
-w = np.load('weight.npy')
+w = np.load('/home/yinzhicun/Deep_learning/regression/homework/weight.npy')
 ans_y = np.dot(test_x, w)
 print(ans_y)
