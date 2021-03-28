@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-27 22:45:54
- * @LastEditTime: 2021-03-28 22:17:06
+ * @LastEditTime: 2021-03-28 22:19:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /deep_learing/regression/note.md
@@ -44,9 +44,9 @@ $$\frac{\partial{L}}{\partial{b}}=2\sum_{i=1}^n(\hat{y}^i-(\omega\cdot x^i+b))\c
 
 &emsp; 则有:
 
-$$\omega^{i}=\omega^{i-1}-\eta\frac{\partial{L}}{\partial{\omega}}|_{\omega=\omega^{i-1},b=b^{i-1}}$$
+$$\omega^{i}=\omega^{i-1}-\eta\frac{\partial{L}}{\partial{\omega}}{|}_{\omega=\omega^{i-1},b=b^{i-1}}$$
 
-$$b^{i}=b^{i-1}-\eta\frac{\partial{L}}{\partial{b}}|_{\omega=\omega^{i-1},b=b^{i-1}}$$
+$$b^{i}=b^{i-1}-\eta\frac{\partial{L}}{\partial{b}}{|}_{\omega=\omega^{i-1},b=b^{i-1}}$$
 
 &emsp; 其中 $i\ge1$, $\eta$ 为学习率 (自己设定),写成矩阵的形式如下:
 $$A=\left[ \begin{matrix} \omega \\ b \end{matrix} \right]$$
