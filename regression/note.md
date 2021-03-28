@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-27 22:45:54
- * @LastEditTime: 2021-03-28 11:22:39
+ * @LastEditTime: 2021-03-28 15:06:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /deep_learing/regression/note.md
@@ -63,6 +63,16 @@ $$A^i=A^{i-1}-\eta\nabla{L}$$
 
 ### 三、评价求解出的模型
 
-1. 最直观的方法是采用优化完成之后误差函数的稳态值的大小来直接估计模型的好坏,一般来说,误差函数值越小,模型越好.
-2. 问题之一 ***overfitting*** 把训练样本自身的一些特点当做了所有潜在样本的一般性质,导致泛化性能下降
-3. 问题之二***underfitting***
+1. 最直观的方法是采用优化完成之后误差函数的稳态值的大小来直接估计模型的好坏,一般来说,误差函数值越小,模型越好,但是由于**过拟合**问题的存在导致该值不适合作为标准.**所以一般使用测试集的误差来对模型进行评估**.
+- 选择测试集的三种方法: 留出法,交叉验证法,自助法
+   
+2. 问题之一 ***overfitting*** 把训练样本自身的一些特点当做了所有潜在样本的一般性质,导致泛化性能下降,他也是机器学习中所遇到的**关键障碍**.
+- 实质是模型的 ***variance*** 偏大.一般现象是在 training_data 上有较好的效果,而在 testing_data上却效果不佳. 
+- 解决方法之一: Regularization (正则化)
+
+&emsp;&emsp;也就是改写损失函数为:
+$$L(\omega,b)=\sum_{i=1}^n(\hat{y}^i-(\omega\cdot x^i+b))^2+\lambda\sum_{i=1}^n\omega^2$$
+&emsp;&emsp;**注: 不需要考虑b项,但是正则化在消除 variance 的过程中会损伤到 bias**
+
+3. 问题之二 ***underfitting*** 是指训练样本自身的特点没有学习到位.
+- 实质上是模型的 ***bias*** 偏大.一般现象为模型对 training_data 的拟合就效果不好.
