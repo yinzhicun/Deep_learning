@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-27 22:45:54
- * @LastEditTime: 2021-03-28 22:20:10
+ * @LastEditTime: 2021-03-29 09:59:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /deep_learing/regression/note.md
@@ -49,8 +49,8 @@ $$\omega^{i}=\omega^{i-1}-\eta\frac{\partial{L}}{\partial{\omega}}{|}_{\omega=\o
 $${b}^{i}=b^{i-1}-\eta\frac{\partial{L}}{\partial{b}}{|}_{\omega=\omega^{i-1},b=b^{i-1}}$$
 
 &emsp; 其中 $i\ge1$, $\eta$ 为学习率 (自己设定),写成矩阵的形式如下:
-$$A=\left[ \begin{matrix} \omega \\ b \end{matrix} \right]$$
-$$\nabla{L}=\left[\begin{matrix}\frac{\partial{L}}{\partial{\omega}} \\ \\ \frac{\partial{L}}{\partial{b}} \end{matrix} \right]$$
+$$A=[  \omega \ b]^T$$
+$$\nabla{L}=[\frac{\partial{L}}{\partial{\omega}}\  \frac{\partial{L}}{\partial{b}}]^T$$
 
 &emsp; 则有:
 $$A^i=A^{i-1}-\eta\nabla{L}$$
@@ -74,7 +74,7 @@ $$L(\omega,b)=\sum_{i=1}^n(\hat{y}^i-(\omega\cdot x^i+b))^2+\lambda\sum_{i=1}^n\
 - 实质上是模型的 ***bias*** 偏大.一般现象为模型对 training_data 的拟合就效果不好.
 
 ### 四、优化梯度下降法
-1. **Adagrad** 通过确定合适的 $\eta$ 来使损失函数可以达到最小值
+1. **Adagrad**: 优化 $\eta$ 值 
 - 由于一般来说 $\eta$ 会随着像最优点的靠近越来越小所以：
 $$\omega^{t+1}=\omega^t-\eta^t\nabla{L}^t$$
 $$其中\quad\eta^t = \frac{\eta}{\sqrt{t+1}}$$
@@ -82,9 +82,12 @@ $$其中\quad\eta^t = \frac{\eta}{\sqrt{t+1}}$$
 - 用对一次微分的二范数来代替难以计算的二次微分
 $$\omega^{t+1}=\omega^t-\frac{\eta}{\sqrt{\sum_{i=0}^t(\nabla{L}^i)^2}}\nabla{L}^t$$
 
-2. **SGD** 每次只取一个或一部分样本进行优化
+2. **SGD**:  每次只取一个或一部分样本进行优化,来增加计算速度
 
-3. **Feature_Scaling** 让 $x_1,x_2,...,x_n$ 的值归一化，使他们的尺度保持一致，一般采取方式如下
+3. **Feature_Scaling** 让 $x_1,x_2,...,x_n$ 的值归一化，使他们的尺度保持一致，一般采取方式为计算**标准分数**
 $$x_{ij}=\frac{x_{ij}-mean(x_j)}{std(x_j)}$$ 
 - $mean(x_j)$ 为对第 $j$ 组参数取平均值
 - $std(x_j)$ 为对第 $j$ 组参数取标准差
+
+
+![avatar](./9c2cca0fa64fac09be4a27101f4cf58d_r.jpg)
