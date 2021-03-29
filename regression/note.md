@@ -1,7 +1,7 @@
 <!--
- * @Author: your name
+ * @Author: yinzhicun
  * @Date: 2021-03-27 22:45:54
- * @LastEditTime: 2021-03-29 09:59:44
+ * @LastEditTime: 2021-03-29 14:53:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /deep_learing/regression/note.md
@@ -12,7 +12,6 @@
 ## 简介
 
 回归的步骤实际上就是：
-
 - 预设定相应的**函数模型**
 - 通过已有的数据求解函数的参数，得到函数的关系式
 - 对未知的数据进行预测。
@@ -90,4 +89,5 @@ $$x_{ij}=\frac{x_{ij}-mean(x_j)}{std(x_j)}$$
 - $std(x_j)$ 为对第 $j$ 组参数取标准差
 
 
-![avatar](./9c2cca0fa64fac09be4a27101f4cf58d_r.jpg)
+![avatar](./picture/9c2cca0fa64fac09be4a27101f4cf58d_r.jpg)
+![avatar](./picture/959f87d9e552294c10a15691219d3e5e_1440w.jpeg)
