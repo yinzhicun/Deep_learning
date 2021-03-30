@@ -1,7 +1,7 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-03-27 22:45:54
- * @LastEditTime: 2021-03-29 14:53:02
+ * @LastEditTime: 2021-03-30 15:45:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /deep_learing/regression/note.md
@@ -12,11 +12,12 @@
 ## 简介
 
 回归的步骤实际上就是：
-- 预设定相应的**函数模型**
-- 通过已有的数据求解函数的参数，得到函数的关系式
-- 对未知的数据进行预测。
+- 预设定相应的**函数模型**－*Model*
+- 设定损失函数 －*Loss function*
+- 求解最优的函数模型 －*Find the best function*
+- 通过函数对未知数据的进行预测
 
-### 一、函数模型的定义
+### 一、函数模型以及误差函数的定义
 
 1. 定义线性模型：
    $$y=\sum_{i=1}^n{\omega_{i}\cdot\ x_{i}}+b$$
@@ -27,8 +28,6 @@
 - $x^i_j$ 表示用来预测函数的第 $i$ 组数据的第 $j$ 个参数值
 - $\omega_j$ 为第 $j$ 个参数值的权重
 
-很显而易见的是 $L(f)$ 是关于 $\omega$ 和 $b$ 的函数。我们要做的就是调整 $\omega$ 和 $b$ 让误差函数最小。
-
 ### 二、求解函数参数
 
 1. 设置函数模型为一个参数值的简单模型：
@@ -36,6 +35,8 @@ $$y=\omega\cdot x+b$$
 
 2. 可得误差函数为：
 $$L(\omega,b)=\sum_{i=1}^n(\hat{y}^i-(\omega\cdot x^i+b))^2$$
+
+- 很显而易见的是 $L(f)$ 是关于 $\omega$ 和 $b$ 的函数。我们要做的就是调整 $\omega$ 和 $b$ 让误差函数最小。
 
 3. 采用梯度下降法求解
 $$\frac{\partial{L}}{\partial{\omega}}=2\sum_{i=1}^n(\hat{y}^i-(\omega\cdot x^i+b))\cdot (-x^i)$$
@@ -72,7 +73,7 @@ $$L(\omega,b)=\sum_{i=1}^n(\hat{y}^i-(\omega\cdot x^i+b))^2+\lambda\sum_{i=1}^n\
 3. 问题之二 ***underfitting*** 是指训练样本自身的特点没有学习到位.
 - 实质上是模型的 ***bias*** 偏大.一般现象为模型对 training_data 的拟合就效果不好.
 
-### 四、优化梯度下降法
+### 四、优化梯度下降法的技巧
 1. **Adagrad**: 优化 $\eta$ 值 
 - 由于一般来说 $\eta$ 会随着像最优点的靠近越来越小所以：
 $$\omega^{t+1}=\omega^t-\eta^t\nabla{L}^t$$
@@ -89,5 +90,5 @@ $$x_{ij}=\frac{x_{ij}-mean(x_j)}{std(x_j)}$$
 - $std(x_j)$ 为对第 $j$ 组参数取标准差
 
 
-![avatar](./picture/9c2cca0fa64fac09be4a27101f4cf58d_r.jpg)
-![avatar](./picture/959f87d9e552294c10a15691219d3e5e_1440w.jpeg)
+![avatar](./picture/1.jpg)
+![avatar](./picture/2.png)
