@@ -1,7 +1,7 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-03-29 20:39:08
- * @LastEditTime: 2021-03-30 22:10:41
+ * @LastEditTime: 2021-03-30 23:45:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_learning/classification/note.md
@@ -52,7 +52,7 @@ $$f_{\mu,\Sigma}(x)=\frac{1}{(2\pi)^\frac{D}{2}}\frac{1}{|\Sigma|^\frac{1}{2}}e^
 $$MAX\ Likelihood(\mu,\Sigma)=\sum_{i=1}^{n}{f_{\mu,\Sigma}(x^i)}$$
 
 
-- 设让Likelihood最大的 $\mu$ 和 $\Sigma$ 为$\mu^*$ 和 $\Sigma^*$ ，则：
+- 设让Likelihood最大的 $\mu$ 和 $\Sigma$ 为$\mu^{*}$ 和 $\Sigma^{*}$ ，则：
 $$\mu^*=\frac{1}{n}\sum_{i=1}^nx^i$$
 $$\Sigma^*=\frac{1}{n}\sum_{i=1}^n(x^i-\mu^*)(x^i-\mu^*)^T$$
 
