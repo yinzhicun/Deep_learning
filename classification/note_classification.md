@@ -1,7 +1,7 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-03-29 20:39:08
- * @LastEditTime: 2021-03-30 15:52:01
+ * @LastEditTime: 2021-03-30 22:10:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_learning/classification/note.md
@@ -49,10 +49,59 @@ $$f_{\mu,\Sigma}(x)=\frac{1}{(2\pi)^\frac{D}{2}}\frac{1}{|\Sigma|^\frac{1}{2}}e^
 **注：多元正态分布的概率密度是由协方差矩阵的特征向量控制旋转(rotation)，特征值控制尺度(scale)，除了协方差矩阵，均值向量会控制概率密度的位置**
 
 3. 最大化概率求解
+$$MAX\ Likelihood(\mu,\Sigma)=\sum_{i=1}^{n}{f_{\mu,\Sigma}(x^i)}$$
 
-- 我们所期望的 $\mu$ 和 $\Sigma$ 就是让Likelihood最大的 $\mu$ 和 $\Sigma$
 
 - 设让Likelihood最大的 $\mu$ 和 $\Sigma$ 为$\mu^*$ 和 $\Sigma^*$ ，则：
-$$\mu^*=\frac{1}{n}\sum_{i=1}^nx^n$$
-$$\Sigma^*=\frac{1}{n}\sum_{i=1}^n(x^n-\mu^*)(x^n-\mu^*)^T$$
+$$\mu^*=\frac{1}{n}\sum_{i=1}^nx^i$$
+$$\Sigma^*=\frac{1}{n}\sum_{i=1}^n(x^i-\mu^*)(x^i-\mu^*)^T$$
 
+### 三、线性分类判别与二次分类判别
+1. 线性分类判别（**LDA**）：一定程度上简化模型，抑制overfitting
+
+$$\begin{aligned}
+P(C_1|x)&=\frac{P(x|C_1)P(C_1)}{P(x|C_1)P(C_1)+P(x|C_2)P(C_2)}\\
+&=\frac{1}{1+\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)}}\\
+&=\frac{1}{1+e^{-z}}\\
+&=\sigma(z)
+\end{aligned}$$
+$$z=ln\frac{P(C_1|x)}{P(C_2|x)}=ln\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)}$$
+- 当两个分布具有相同的方差值时,在多维高斯分布中显示为两者的协方差矩阵相同，这时：
+$$\begin{aligned}
+z=ln\frac{P(C_1|x)}{P(C_2|x)}&=ln\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)} \\ 
+&=ln\frac{f_{\mu_1,\Sigma}(x)}{f_{\mu_2,\Sigma}(x)}+ln(\frac{P(C_1)}{P(C_2)})\\
+&=x^T\Sigma^{-1}(\mu_1-\mu_2)-\frac{1}{2}(\mu_1+\mu_2)\Sigma^{-1}(\mu_1-\mu_2)+ln(\frac{P(C_1)}{P(C_2)})
+\end{aligned}$$
+- 可以发现上式是性的，也就是 $P(C_1|x)=P(C_2|x)$ 时边界条件是线性的，即划分两个类别区域的分界线为直线
+
+
+1. 二次分类判别（**QDA**）:
+
+- 此时两个分布方差值不同，这时有分类判别函数：
+$$\begin{aligned}
+ln\frac{P(C_1|x)}{P(C_2|x)}&=ln\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)} \\ 
+&=ln\frac{f_{\mu_1,\Sigma_1}(x)}{f_{\mu_2,\Sigma_2}(x)}+ln(\frac{P(C_1)}{P(C_2)})\\
+&=-\frac{1}{2}x^T(\Sigma_1^{-1}-\Sigma_2^{-1})x+x^T(\Sigma_1^{-1}\mu_1-\Sigma_2^{-1}\mu_2)-\frac{1}{2}(\mu_1+\mu_2)\Sigma^{-1}(\mu_1-\mu_2)-\frac{1}{4}ln(\frac{|\Sigma_2|}{|\Sigma_1|})+ln(\frac{P(C_1)}{P(C_2)})
+\end{aligned}$$
+
+- 可以发现上式是非线性的，也就是 $P(C_1|x)=P(C_2|x)$ 时边界条件是二次型，即划分两个类别区域的分界线为曲线
+
+3. 通过 **LDA** 简化上述模型，即令两个分布的协方差矩阵相等
+
+- 此时误差函数为
+
+$$Likelihood(\mu_1,\mu_2,\Sigma)=\sum_{i=1}^{k}{f_{\mu_1,\Sigma}(x^i)}+\sum_{i=k+1}^{n}{f_{\mu_2,\Sigma}(x^i)}$$
+
+- 最大化概率求解
+$$MAX\ Likelihood(\mu_1,\mu_2,\Sigma)=\sum_{i=1}^{k}{f_{\mu_1,\Sigma}(x^i)}+\sum_{i=k+1}^{n}{f_{\mu_2,\Sigma}(x^i)}$$
+
+
+- 设让Likelihood最大的 $\mu$ 和 $\Sigma$ 为$\mu_1^*$，$\mu_2^*$ 和 $\Sigma^*$ ，则：
+$$\mu_1^*=\frac{1}{k}\sum_{i=1}^kx^i$$
+$$\mu_2^*=\frac{1}{n-k}\sum_{i=k+1}^nx^i$$
+$$\Sigma_1=\frac{1}{k}\sum_{i=1}^j(x^i-\mu_1^*)(x^i-\mu1^*)^T$$
+$$\Sigma_2=\frac{1}{n-k}\sum_{i=k+1}^n(x^i-\mu_2^*)(x^i-\mu2^*)^T$$
+$$\Sigma^*=\frac{k}{n}\Sigma_1+\frac{n-k}{n}\Sigma_2$$
+
+### 四、其他
+1. 当多维正太分布的特征的每一个分量相互**独立**时，可以看做多个一维的高斯分布的组合，采用**朴素贝叶斯分类方法**
