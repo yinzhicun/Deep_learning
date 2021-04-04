@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-03 09:29:50
- * @LastEditTime: 2021-04-03 11:05:15
+ * @LastEditTime: 2021-04-03 11:58:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_learning/classification/note_logistic_regression.md
@@ -60,7 +60,9 @@ P(C_1|x)&=f(x)\\
 - 到了这里就可以 $w$ 和 $b$ 为参数进行回归运算，如果以**网络**的思想来看的话，就是在一层全联接层之后又加上了一个**sigmod的激活函数**将输入限制再在(0,1)中
 
 2. 定义误差函数：
+
 $$Likelihood(f)=\sum_{i=1}^{k}{f(x^i)}\cdot\sum_{i=k+1}^{n}{(1-f(x^i))}$$
+
 - 其中 $x$ 为随机变量
 - $f(x)$ 为 $P(C_1|x)$，$1-f(x)$ 为 $P(C_2|x)$
 - 1-k组的训练数据是 $C_1$ 一类的，而k+1-n组得训练数据是 $C_2$ 一类的
@@ -75,7 +77,12 @@ $$Likelihood(f)=\sum_{i=1}^{k}{f(x^i)}\cdot\sum_{i=k+1}^{n}{(1-f(x^i))}$$
 ![avastar](./picture/5.png)
 图片均取自知乎（https://www.zhihu.com/question/65288314/answer/244557337）
 
-2.
+2. 设如果 $x$ 的类别属于 $C_1$ 则 $\hat{y}=1$; 如果 $x$ 的类别属于 $C_2$ 则 $\hat{y}=0$，这时对一中的误差函数两边取对数则有：
+$$-ln(L(x))=-\sum_{i=1}^n{[\hat{y}^ilnf(x^i)+(1-\hat{y}^i)ln(1-f(x^i))]}$$
+
+- 这实际上就是一个交叉熵公式
+
+
 ### 三、线性分类判别与二次分类判别
 1. 线性分类判别（**LDA**）：一定程度上简化模型，抑制overfitting
 
