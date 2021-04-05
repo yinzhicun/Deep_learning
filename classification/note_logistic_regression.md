@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-03 09:29:50
- * @LastEditTime: 2021-04-03 11:58:23
+ * @LastEditTime: 2021-04-05 16:47:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_learning/classification/note_logistic_regression.md
@@ -80,55 +80,29 @@ $$Likelihood(f)=\sum_{i=1}^{k}{f(x^i)}\cdot\sum_{i=k+1}^{n}{(1-f(x^i))}$$
 2. 设如果 $x$ 的类别属于 $C_1$ 则 $\hat{y}=1$; 如果 $x$ 的类别属于 $C_2$ 则 $\hat{y}=0$，这时对一中的误差函数两边取对数则有：
 $$-ln(L(x))=-\sum_{i=1}^n{[\hat{y}^ilnf(x^i)+(1-\hat{y}^i)ln(1-f(x^i))]}$$
 
-- 这实际上就是一个交叉熵公式
+- 这实际上就是一个交叉熵公式,而我们要做的就是使其最小
+
+3. 梯度下降
+![avastar](./picture/6.png)
+- 对比线性回归模型发现，其导数相同
+![avastar](./picture/7.png)
 
 
-### 三、线性分类判别与二次分类判别
-1. 线性分类判别（**LDA**）：一定程度上简化模型，抑制overfitting
 
-$$\begin{aligned}
-P(C_1|x)&=\frac{P(x|C_1)P(C_1)}{P(x|C_1)P(C_1)+P(x|C_2)P(C_2)}\\
-&=\frac{1}{1+\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)}}\\
-&=\frac{1}{1+e^{-z}}\\
-&=\sigma(z)
-\end{aligned}$$
-$$z=ln\frac{P(C_1|x)}{P(C_2|x)}=ln\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)}$$
-- 当两个分布具有相同的方差值时,在多维高斯分布中显示为两者的协方差矩阵相同，这时：
-$$\begin{aligned}
-z=ln\frac{P(C_1|x)}{P(C_2|x)}&=ln\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)} \\ 
-&=ln\frac{f_{\mu_1,\Sigma}(x)}{f_{\mu_2,\Sigma}(x)}+ln(\frac{P(C_1)}{P(C_2)})\\
-&=x^T\Sigma^{-1}(\mu_1-\mu_2)-\frac{1}{2}(\mu_1+\mu_2)\Sigma^{-1}(\mu_1-\mu_2)+ln(\frac{P(C_1)}{P(C_2)})
-\end{aligned}$$
-- 可以发现上式是性的，也就是 $P(C_1|x)=P(C_2|x)$ 时边界条件是线性的，即划分两个类别区域的分界线为直线
+### 三、为什么不使用二范数损失函数
+1. 当结果很接近最佳概率时二范数损失函数导数接近于0，当结果原理时其导数依然接近于0；所以为了寻求更好的效果选择交叉熵作为损失函数
+![avastar](./picture/8.png)
+- 可视化效果如下图所示
+![avastar](./picture/9.png)
 
 
-1. 二次分类判别（**QDA**）:
+### 四、Discriminative && Generative
+1. 两种方法使用同一种模型，而求得参数的方法不同
+![avastar](./picture/10.png)
+2. 实际上数据量较小时，生成模型更加优异；而数据量大时判别模型更加优异
 
-- 此时两个分布方差值不同，这时有分类判别函数：
-$$\begin{aligned}
-ln\frac{P(C_1|x)}{P(C_2|x)}&=ln\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)} \\ 
-&=ln\frac{f_{\mu_1,\Sigma_1}(x)}{f_{\mu_2,\Sigma_2}(x)}+ln(\frac{P(C_1)}{P(C_2)})\\
-&=-\frac{1}{2}x^T(\Sigma_1^{-1}-\Sigma_2^{-1})x+x^T(\Sigma_1^{-1}\mu_1-\Sigma_2^{-1}\mu_2)-\frac{1}{2}(\mu_1+\mu_2)\Sigma^{-1}(\mu_1-\mu_2)-\frac{1}{4}ln(\frac{|\Sigma_2|}{|\Sigma_1|})+ln(\frac{P(C_1)}{P(C_2)})
-\end{aligned}$$
-
-- 可以发现上式是非线性的，也就是 $P(C_1|x)=P(C_2|x)$ 时边界条件是二次型，即划分两个类别区域的分界线为曲线
-
-3. 通过 **LDA** 简化上述模型，即令两个分布的协方差矩阵相等
-
-- 此时误差函数为
-
-$$Likelihood(\mu_1,\mu_2,\Sigma)=\sum_{i=1}^{k}{f_{\mu_1,\Sigma}(x^i)}+\sum_{i=k+1}^{n}{f_{\mu_2,\Sigma}(x^i)}$$
-
-- 最大化概率求解
-$$MAX\ Likelihood(\mu_1,\mu_2,\Sigma)=\sum_{i=1}^{k}{f_{\mu_1,\Sigma}(x^i)}+\sum_{i=k+1}^{n}{f_{\mu_2,\Sigma}(x^i)}$$
+### 五、其他
+1. 通过**Sorfmax**进行多分类问题的求解
+2. 逻辑回归对于异或门一类的问题是有局限的，需要进行Transform ——> 引出了神经网络（神经网络可以看作让机器对特征做transform）
 
 
-- 设让Likelihood最大的 $\mu$ 和 $\Sigma$ 为$\mu_1^*$，$\mu_2^*$ 和 $\Sigma^*$ ，则：
-$$\mu_1^*=\frac{1}{k}\sum_{i=1}^kx^i$$
-$$\mu_2^*=\frac{1}{n-k}\sum_{i=k+1}^nx^i$$
-$$\Sigma_1=\frac{1}{k}\sum_{i=1}^j(x^i-\mu_1^*)(x^i-\mu1^*)^T$$
-$$\Sigma_2=\frac{1}{n-k}\sum_{i=k+1}^n(x^i-\mu_2^*)(x^i-\mu2^*)^T$$
-$$\Sigma^*=\frac{k}{n}\Sigma_1+\frac{n-k}{n}\Sigma_2$$
-
-### 四、其他
-1. 当多维正太分布的特征的每一个分量相互**独立**时，可以看做多个一维的高斯分布的组合，采用**朴素贝叶斯分类方法**
