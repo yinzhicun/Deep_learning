@@ -1,7 +1,7 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-04-05 16:58:28
- * @LastEditTime: 2021-04-06 23:40:12
+ * @LastEditTime: 2021-04-06 23:42:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_Learning/deep_learning/note_preparation.md
@@ -89,8 +89,8 @@ $$\frac{\partial{C}}{\partial{z}}=\frac{\partial{C}}{\partial{z}}\frac{\partial{
 - 实际上输入不同的时候，每一个MaxOut单元做出的输出也不同，也就是说随着训练的进行，连接MaxOut节点的每一条网络都可以被训练到，所以不会存在漏训练的问题
 ![](./picture/17.png)
 
-### 2. 通过对学习率的优化改善梯度下降法
-#### 2.1  Adagrad 
+#### 2. 通过对学习率的优化改善梯度下降法
+##### 2.1  Adagrad 
 **原因**：不同方向上的下降速度不同，需要不同的学习率
 - 由于一般来说 $\eta$ 会随着像最优点的靠近越来越小所以：
 $$\omega^{t+1}=\omega^t-\eta^t\nabla{L}^t$$
@@ -99,33 +99,33 @@ $$其中\quad\eta^t = \frac{\eta}{\sqrt{t+1}}$$
 - 用对一次微分的二范数来代替难以计算的二次微分
 $$\omega^{t+1}=\omega^t-\frac{\eta}{\sqrt{\sum_{i=0}^t(\nabla{L}^i)^2}}\nabla{L}^t$$
 
-#### 2.2 RMSProp
+##### 2.2 RMSProp
 **原因**：同一方向上的下降速度也会不同，需要不同的学习率
 ![](./picture/18.png)
 
 - 实现如下，$\alpha$ 值越大则越相信过去的值，$\alpha$ 值越小则越相信现在的值
 ![](./picture/19.png)
 
-#### 2.3 Momentum
+##### 2.3 Momentum
 **原因**：一定程度上解决局部最优的问题，实际上可以看做引入了惯性的概念
 ![](./picture/20.png)
 ![](./picture/21.png)
 
-#### 2.4 Adam
+##### 2.4 Adam
 **原因**：RMSProp与Momentum相结合
 ![](./picture/22.png)
 
-### 3. 训练到适当的时候停止
+#### 3. 训练到适当的时候停止
 **原因**：抑制overfitting
 通过有有标签的测试集实验选择更好的样本数
 
-### ４. 正则化
+#### ４. 正则化
 **原因**：泛化特征，平滑曲线
 - 趋近于0的是 $\eta\lambda$
 ![](./picture/23.png)
 ![](./picture/24.png)
 
-### 5. Dropout
+#### 5. Dropout
 - 什么是Dropout
 - 实际上就是每次训练时删除p%的单元，用minibatch进行训练，最后再将训练的模型的参数叠加
 ![](./picture/25.png)
