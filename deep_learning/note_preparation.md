@@ -1,12 +1,12 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-04-05 16:58:28
- * @LastEditTime: 2021-04-06 23:43:20
+ * @LastEditTime: 2021-04-06 23:57:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_Learning/deep_learning/note_preparation.md
 -->
-# <center>Preparation for DL</center>
+# <center>Preparation_for_DL</center>
 
 ## 简介
 
