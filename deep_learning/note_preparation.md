@@ -1,7 +1,7 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-04-05 16:58:28
- * @LastEditTime: 2021-04-06 21:51:17
+ * @LastEditTime: 2021-04-06 23:38:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_Learning/deep_learning/note_preparation.md
@@ -121,13 +121,23 @@ $$\omega^{t+1}=\omega^t-\frac{\eta}{\sqrt{\sum_{i=0}^t(\nabla{L}^i)^2}}\nabla{L}
 
 ### ４. 正则化
 **原因**：泛化特征，平滑曲线
+- 趋近于0的是 $\eta\lambda$
 ![](./picture/23.png)
 ![](./picture/24.png)
 
+### 5. Dropout
+- 什么是Dropout
+- 实际上就是每次训练时删除p%的单元，用minibatch进行训练，最后再将训练的模型的参数叠加
+![](./picture/25.png)
+![](./picture/26.png)
+![](./picture/27.png)
 
-### 四、Discriminative && Generative
+- **原理**：实际通过一种全局的思想，每一个Dropout后的模型的variance小而Bias大，叠加之后就能获得variance和bias都较小的模型
+- 由于激活函数为线性时可以严格证明Dropout的正确性，所以当激活函数越**接近线性模型**时，Dropout的效果最好；所以当激活函数为ReLU时，Dropout比较合适
 
+### 四、Why deep
+深度的实质可以看作在每个隐藏层作了**模块化**，对不同模块进行分类后，再将分类结果组合起来；所以深度学习可以用较少的数据达到更好的效果
+![](./picture/28.png)
 
-### 五、其他
-
+一些思考：之前提到过神经网络的每一层可以看作对特征做了一些Transform来方便分类，实际上这些Transform的过程是不是可以看作将相同的模块进行了某种程度上的聚类，再多层分类后，对空间进行划分，分类
 
