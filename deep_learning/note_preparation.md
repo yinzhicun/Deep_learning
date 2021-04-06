@@ -1,7 +1,7 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-04-05 16:58:28
- * @LastEditTime: 2021-04-06 09:51:59
+ * @LastEditTime: 2021-04-06 09:54:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_Learning/deep_learning/note_preparation.md
@@ -30,7 +30,7 @@
 摘自知乎<https://www.zhihu.com/question/24259872/answer/127219970>(有所删改)
 
 - 全连接网络图
-![avatar](./picture/1.png)
+![avastar](./picture/1.png)
 **总：** 上述材料说明了通过神经网络来设定函数模型的可行性，并且解释了激活函数的相关问题
 
 #### 2. 误差函数的定义
@@ -40,7 +40,7 @@
 
 ### 二、求解函数参数
 通过前向传播和反向传播的叠加进行求导来进梯度下降
-![avatar](./picture/3.png)
+![avastar](./picture/3.png)
 #### 1. 前向传播 
 
 
