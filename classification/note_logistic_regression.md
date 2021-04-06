@@ -1,7 +1,7 @@
 <!--
- * @Author: your name
+ * @Author: yinzhicun
  * @Date: 2021-04-03 09:29:50
- * @LastEditTime: 2021-04-05 16:47:12
+ * @LastEditTime: 2021-04-06 08:41:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_learning/classification/note_logistic_regression.md
