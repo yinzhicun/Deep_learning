@@ -1,7 +1,7 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-04-05 16:58:28
- * @LastEditTime: 2021-04-06 23:38:27
+ * @LastEditTime: 2021-04-06 23:40:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_Learning/deep_learning/note_preparation.md
@@ -18,7 +18,7 @@
 ### 一、函数模型及误差函数的定义
 #### 1. 为什么可以使用神经网络作为函数模型
 > 数学原理：任何**连续**多元函数都能被一组一元函数的**有限次叠加**(注意这里的叠加可以是**非线性**的)而成，其中每一个一元函数的自变量都是一组连续单变量函数的**有限次加权叠加**。而这内层的每一个单变量函数的自变量都是一个（即一维）变量。
->> 例：$x \cdot y = e^{log(x+1)+log(y+1)}-(x+0.5)-(y+0.5)$
+>> 例：$xy = e^{log(x+1)+log(y+1)}-(x+0.5)-(y+0.5)$
 
  具体参考：<https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Arnold_representation_theorem>
 
