@@ -1,7 +1,7 @@
 <!--
  * @Author: yinzhicun
  * @Date: 2021-04-05 16:58:28
- * @LastEditTime: 2021-04-06 23:42:22
+ * @LastEditTime: 2021-04-06 23:43:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /Deep_Learning/deep_learning/note_preparation.md
@@ -85,7 +85,7 @@ $$\frac{\partial{C}}{\partial{z}}=\frac{\partial{C}}{\partial{z}}\frac{\partial{
 - 当MaxOut函数的输入值为线性函数时，可以转化为下图所示的样子，也就是ReLU函数
 ![](./picture/15.png)
 
-#### 1.2 训练MaxOut的一些问题
+##### 1.2 训练MaxOut的一些问题
 - 实际上输入不同的时候，每一个MaxOut单元做出的输出也不同，也就是说随着训练的进行，连接MaxOut节点的每一条网络都可以被训练到，所以不会存在漏训练的问题
 ![](./picture/17.png)
 
@@ -119,7 +119,7 @@ $$\omega^{t+1}=\omega^t-\frac{\eta}{\sqrt{\sum_{i=0}^t(\nabla{L}^i)^2}}\nabla{L}
 **原因**：抑制overfitting
 通过有有标签的测试集实验选择更好的样本数
 
-#### ４. 正则化
+#### 4. 正则化
 **原因**：泛化特征，平滑曲线
 - 趋近于0的是 $\eta\lambda$
 ![](./picture/23.png)
