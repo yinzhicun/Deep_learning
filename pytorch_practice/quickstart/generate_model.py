@@ -1,7 +1,7 @@
 '''
 Author: yinzhicun
 Date: 2021-04-04 21:04:55
-LastEditTime: 2021-04-08 11:24:17
+LastEditTime: 2021-04-08 13:27:11
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /Deep_Learning/pytorch_practice/quickstart.py

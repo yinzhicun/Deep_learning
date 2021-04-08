@@ -1,7 +1,7 @@
 '''
 Author: yinzhicun
 Date: 2021-04-07 10:35:16
-LastEditTime: 2021-04-07 11:18:32
+LastEditTime: 2021-04-08 13:28:44
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /Deep_Learning/pytorch_practice/load_model.py
