@@ -1,7 +1,7 @@
 '''
 Author: yinzhicun
 Date: 2021-04-04 21:04:55
-LastEditTime: 2021-04-07 11:16:44
+LastEditTime: 2021-04-08 11:24:17
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /Deep_Learning/pytorch_practice/quickstart.py
@@ -19,11 +19,11 @@ class NeuralNetwork(nn.Module):
         self.flatten = nn.Flatten()
         self.linear_relu_stack = nn.Sequential(
             nn.Linear(28*28, 512),
-            nn.ReLU(),
+            nn.Sigmoid(),
             nn.Linear(512, 512),
-            nn.ReLU(),
+            nn.Sigmoid(),
             nn.Linear(512, 10),
-            nn.ReLU()
+            nn.Sigmoid()
         )
 
     def forward(self, x):
@@ -35,7 +35,7 @@ def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     for batch, (X, y) in enumerate(dataloader):
         X, y = X.to(device), y.to(device)
-
+        print(X.shape)
         # Compute prediction error
         pred = model(X)
         loss = loss_fn(pred, y)
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     print(model)
     
     loss_fn = nn.CrossEntropyLoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
     
     epochs = 5
     for t in range(epochs):

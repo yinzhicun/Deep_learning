@@ -1,15 +1,15 @@
 '''
 Author: your name
 Date: 2021-03-28 15:35:45
-LastEditTime: 2021-03-28 20:46:13
+LastEditTime: 2021-04-08 10:45:49
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
-FilePath: /Deep_learning/regression/homework/homework.py
+FilePath: /Deep_Learning/regression/homework/homework.py
 '''
 import pandas as pd
 import numpy as np
 #读取文件
-data  =  pd.read_csv('/home/yinzhicun/Deep_learning/regression/homework/train.csv')
+data  =  pd.read_csv('/home/yinzhicun/Deep_Learning/regression/homework/train.csv')
 #去除前三列的无用信息,预处理数据
 data = data.iloc[ : , 3 : ]
 data[data == "NR"] = 0
@@ -65,10 +65,10 @@ for t in range(iter_time):
     gradient = 2 * np.dot(x.transpose(), np.dot(x, w) - y) #dim*1
     adagrad += gradient ** 2
     w = w - learning_rate * gradient / np.sqrt(adagrad + eps)
-np.save('/home/yinzhicun/Deep_learning/regression/homework/weight.npy', w)
+np.save('/home/yinzhicun/Deep_Learning/regression/homework/weight.npy', w)
 
 # testdata = pd.read_csv('gdrive/My Drive/hw1-regression/test.csv', header = None, encoding = 'big5')
-testdata = pd.read_csv('/home/yinzhicun/Deep_learning/regression/homework/test.csv', header = None, encoding = 'big5')
+testdata = pd.read_csv('/home/yinzhicun/Deep_Learning/regression/homework/test.csv', header = None, encoding = 'big5')
 test_data = testdata.iloc[:, 2:]
 test_data[test_data == 'NR'] = 0
 test_data = test_data.to_numpy()
@@ -81,6 +81,6 @@ for i in range(len(test_x)):
             test_x[i][j] = (test_x[i][j] - mean_x[j]) / std_x[j]
 test_x = np.concatenate((np.ones([240, 1]), test_x), axis = 1).astype(float)
 
-w = np.load('/home/yinzhicun/Deep_learning/regression/homework/weight.npy')
+w = np.load('/home/yinzhicun/Deep_Learning/regression/homework/weight.npy')
 ans_y = np.dot(test_x, w)
 print(ans_y)
