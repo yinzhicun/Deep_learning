@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2021-04-08 10:16:23
-LastEditTime: 2021-04-08 13:38:39
+LastEditTime: 2021-04-10 21:15:34
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /Deep_Learning/regression/homework/homework_pytorch.py
@@ -88,10 +88,10 @@ for i in range(len(x)): #12 * 471
 #加上一行模拟b
 x = np.concatenate((np.ones([12 * 471, 1]), x), axis = 1).astype(float)
 
-x_tensor = torch.from_numpy(x).float()
-#print(x_tensor)
-y_tensor = torch.from_numpy(y).float()
-#print(y_tensor)
+# x_tensor = torch.from_numpy(x).float()
+# #print(x_tensor)
+# y_tensor = torch.from_numpy(y).float()
+# #print(y_tensor)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print("Using {} device".format(device))
 
@@ -103,18 +103,23 @@ train_loader = DataLoader(dataset,
 model = NeuralNetwork().to(device)
 criterion = My_loss()
 optimizer = torch.optim.Adagrad(model.parameters(), lr = 100)
-for epoch in range(1000):
-    pred = model(x_tensor)
-    #损失
-    loss = criterion(pred, y_tensor)
-    #梯度归零
-    optimizer.zero_grad()
-    print(epoch, loss)
-    #反馈
-    loss.backward()
-    #优化
-    optimizer.step()
-
+for epoch in range(10):
+    for i, all_data in enumerate(train_loader):
+        x_tensor = all_data["data"]
+        y_tensor = all_data["label"]
+        pred = model(x_tensor)
+        print(pred.shape)
+        #损失
+        loss = criterion(pred, y_tensor)
+        #梯度归零
+        optimizer.zero_grad()
+        print(epoch, loss)
+        #反馈
+        loss.backward()
+        print(loss.grad)
+        #优化
+        optimizer.step()
+    
 torch.save(model.state_dict(),"./regression/homework/Linear.pth")#保存训练模型权重
 
 testdata = pd.read_csv('./regression/homework/test.csv', header = None, encoding = 'big5')
